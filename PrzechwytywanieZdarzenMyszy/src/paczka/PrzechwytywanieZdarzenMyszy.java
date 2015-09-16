@@ -1,5 +1,6 @@
 package paczka;
 import java.awt.Container;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.SystemColor;
@@ -128,6 +129,7 @@ class Panel extends JPanel {
 				if (znajdzKwadrat(punkt, true) == null) {//ma szukac tak aby nie nachodzily na siebie kwadraciki
 					dodajKwadrat(punkt);
 					repaint();
+					setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
 				}
 			} else if (e.getClickCount() == 2) {//jesli to drugie klikniecie - usun kwadrat
 				Rectangle2D tymczasowyKwadrat = znajdzKwadrat(punkt, false);//ma szukac tylko wewnatrz kwadracika, a nie tak zeby nachodzily
@@ -166,6 +168,11 @@ class Panel extends JPanel {
 			
 			przenoszenieKwadratu = false;
 			tymczasowyKwadrat = null;
+			if (znajdzKwadrat(e.getPoint(), false) != null) {
+				setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+			} else {
+				setCursor(Cursor.getDefaultCursor());
+			}
 		}		
 	}
 }
